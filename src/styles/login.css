@@ -55,6 +55,11 @@ svg {
   align-items: center;
 }
 
+img {
+  width: 2.5rem;
+
+}
+
 .spanVal {
   color: red;
   margin-top: 0.5rem;
