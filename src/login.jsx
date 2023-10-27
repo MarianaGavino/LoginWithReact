@@ -52,13 +52,10 @@ export const Login = () => {
       body,
       headers,
     });
-    console.log(response);
 
     setLoading(false)
 
     const data  = await response.json();
-    console.log(data);
-    console.log(data.error)
 
     function emailVal2 () {
       setWrongEmail(data.error === 'user not found' ? "El usuario no existe" : ""); 
@@ -72,9 +69,6 @@ export const Login = () => {
     if (response.status !== 200) {
       console.log("Error");
     } else {
-      console.log("Succes");
-      console.log(data);
-      console.log(data.token);
       navigate('/table')
     }
   };
@@ -92,8 +86,8 @@ export const Login = () => {
           value={userDatos.email}
           onChange={emailInput}
         />
-        <span> {emailValidation} </span>
-        <span> {wrongEmail} </span>
+        <span className="spanVal"> {emailValidation} </span>
+        <span className="spanVal"> {wrongEmail} </span>
         <label>Password</label>
         <div className="pass">
           <input
@@ -124,11 +118,10 @@ export const Login = () => {
             </svg>
           </button>
         </div>
-        <span> {passwordValidation} </span>
+        <span className="spanVal"> {passwordValidation} </span>
         <button className="btnLogin" onClick={() => fetchData() }>
           Iniciar Sesión
         </button>
-        {/* <Link to={isLoggedIn ? "table" : "/"}>Table</Link> */}
       </div>
     </div>
   );

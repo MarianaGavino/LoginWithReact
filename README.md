@@ -2,7 +2,7 @@
 
 The first part of the project involves creating a login using the React library to design the user interface. This includes creating components like login forms, inputs to enter the username and password, and the button to submit the information. Additionally, to authenticate users, we connect to the API [Reqres](https://reqres.in/), which provides a set of test services for managing users and authentication.
 
-The second part of the project focuses on presenting data to users in a distinguishable manner. To achieve this, a table was implemented where odd rows are highlighted in green color and even rows are highlighted in yellow color.
+The second part of the project focuses on presenting a table to users in a distinguishable manner. To achieve this, a table was implemented where odd rows are highlighted in green color and even rows are highlighted in yellow color.
 
 # User Guide
 

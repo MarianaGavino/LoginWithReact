@@ -55,7 +55,7 @@ svg {
   align-items: center;
 }
 
-span {
+.spanVal {
   color: red;
   margin-top: 0.5rem;
 }

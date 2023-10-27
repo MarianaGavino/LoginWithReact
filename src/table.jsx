@@ -1,22 +1,31 @@
 import "./styles/table.css";
 
 export const Table = () => {
-
   const datos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const tableNumbers = datos.map((num) => (
-    <tr key={num}>
-        <td>Fila: {num}</td>
-    </tr>
+  const tableGrid = datos.map((num) => (
+    <div className="row" key={num}>
+      <div className="column">Fila: {num}</div>
+    </div>
   ));
 
   return (
     <div className="tableContainer">
-        <p>Fila impar = Verde</p>
-        <p>Fila par = Amarillo</p>
-        <table className="table">
-            <tbody className="tbody">{tableNumbers}</tbody>
-        </table>
+      <div className="textContainer">
+        <label>
+          La siguiente tabla muestra las filas pares en color amarillo y las
+          impares en color verde
+        </label>
+      </div>
+
+      <div className="gridContainer">
+        <div className="text">Tabla Bicolor</div>
+        {tableGrid.map((item, index) => (
+          <div className="number" key={index}>
+            {item}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
