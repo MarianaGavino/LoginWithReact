@@ -23,9 +23,14 @@ export const Login = () => {
     const password = e.target.value;
     setUserDatos({ ...userDatos, password });
   };
-  
-  function passVal () {
+  const emailVal = () => {
+    setEmailValidation(userDatos.email === "" ? "El email es requerido" : "");
+
+  }
+
+  const passVal = () => {
     setPasswordValidation(userDatos.password === "" ? "La contraseña es requerida" : "");
+
   }
 
   const emailInput = (e) => {
@@ -33,9 +38,8 @@ export const Login = () => {
     setUserDatos({ ...userDatos, email });
   };
 
-  function emailVal () {
-    setEmailValidation(userDatos.email === "" ? "El email es requerido" : "");
-  }
+
+  
 
   const typeInput = () => setShowPass(!showPass);
 
@@ -62,8 +66,9 @@ export const Login = () => {
 
     const data  = await response.json();
 
-    function emailVal2 () {
+    const emailVal2 = () => {
       setWrongEmail(data.error === 'user not found' ? "El usuario no existe" : ""); 
+
     }
 
     emailVal();
@@ -103,7 +108,7 @@ export const Login = () => {
             onChange={passwordInput}
           />
           <button className="btnShowPass" onClick={() => typeInput()}>
-            <img src={logo}></img>
+            <img src={logo} alt="passwordEye"></img>
           </button>
         </div>
         <span className="spanVal"> {passwordValidation} </span>
