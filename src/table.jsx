@@ -11,8 +11,6 @@ export const Table = () => {
     </div>
   ));
 
-  console.log(window.history.length);
-
   return (
     <div className="tableContainer">
       <span className="reLoginPage">
