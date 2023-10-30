@@ -1,6 +1,8 @@
 import "./styles/table.css";
+import { Link } from "react-router-dom";
 
 export const Table = () => {
+
   const datos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const tableGrid = datos.map((num) => (
@@ -9,10 +11,14 @@ export const Table = () => {
     </div>
   ));
 
+  console.log(window.history.length);
+
   return (
     <div className="tableContainer">
       <span className="reLoginPage">
-        <button className="btnReLoginPage">Regresar</button>
+        <Link className="linkReLoginPage" to="/">
+          Regresar
+        </Link>
       </span>
 
       <div className="textContainer">
