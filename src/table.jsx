@@ -11,6 +11,10 @@ export const Table = () => {
 
   return (
     <div className="tableContainer">
+      <span className="reLoginPage">
+        <button className="btnReLoginPage">Regresar</button>
+      </span>
+
       <div className="textContainer">
         <label>
           La siguiente tabla muestra las filas pares en color amarillo y las
