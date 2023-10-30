@@ -4,11 +4,10 @@ import "./styles/login.css";
 import logo from "./passwordEye.svg";
 
 export const Login = () => {
-  const [passwordValidation, setPasswordValidation] = useState("");
-
-  const [emailValidation, setEmailValidation] = useState("");
-
- 
+  const [validation, setValidation] = useState({
+    email: "",
+    password: "",
+  });
 
   const [showPass, setShowPass] = useState(false);
 
@@ -27,12 +26,6 @@ export const Login = () => {
   const passwordInput = (e) => {
     const password = e.target.value;
     setUserDatos({ ...userDatos, password });
-  };
-
-  const passVal = () => {
-    setPasswordValidation(
-      userDatos.password === "" ? "La contraseña es requerida" : ""
-    );
   };
 
   const typeInput = () => setShowPass(!showPass);
@@ -58,19 +51,20 @@ export const Login = () => {
 
     const data = await response.json();
 
-  
-    const emailVal = () => {
-      if (userDatos.email === "") {
-        setEmailValidation("El email es requerido");
-      } else if (data.error === "user not found") {
-        setEmailValidation("El usuario no existe");
-      } else {
-        setEmailValidation("");
+    const val = () => {
+      const errors = {
+        email: userDatos.email === "" ? "El email es requerido" : "",
+        password: userDatos.password === "" ? "La contraseña es requerida" : "",
+      };
+
+      if (data.error === "user not found") {
+        errors.email = "El usuario no existe";
       }
+
+      setValidation(errors);
     };
 
-    emailVal();
-    passVal();
+    val();
 
     if (response.status !== 200) {
       console.log("Error");
@@ -95,7 +89,8 @@ export const Login = () => {
           value={userDatos.email}
           onChange={emailInput}
         />
-        <span className="spanVal"> {emailValidation} </span>
+        <span className="spanVal"> {validation.email} </span>
+
         <label>Password</label>
         <div className="pass">
           <input
@@ -109,7 +104,7 @@ export const Login = () => {
             <img src={logo} alt="passwordEye"></img>
           </button>
         </div>
-        <span className="spanVal"> {passwordValidation} </span>
+        <span className="spanVal">{validation.password}</span>
         <button className="btnLogin" onClick={() => fetchData()}>
           Iniciar Sesión
         </button>
