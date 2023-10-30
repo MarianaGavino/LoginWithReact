@@ -1,51 +1,43 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './styles/login.css';
-import logo from "./passwordEye.svg" 
+import "./styles/login.css";
+import logo from "./passwordEye.svg";
 
 export const Login = () => {
   const [passwordValidation, setPasswordValidation] = useState("");
 
   const [emailValidation, setEmailValidation] = useState("");
 
+ 
+
   const [showPass, setShowPass] = useState(false);
 
   const [loading, setLoading] = useState(false);
-
-  const [wrongEmail, setWrongEmail] = useState("");
 
   const [userDatos, setUserDatos] = useState({
     email: "",
     password: "",
   });
 
-  const passwordInput = (e) => {
-    const password = e.target.value;
-    setUserDatos({ ...userDatos, password });
-  };
-  const emailVal = () => {
-    setEmailValidation(userDatos.email === "" ? "El email es requerido" : "");
-
-  }
-
-  const passVal = () => {
-    setPasswordValidation(userDatos.password === "" ? "La contraseña es requerida" : "");
-
-  }
-
   const emailInput = (e) => {
     const email = e.target.value;
     setUserDatos({ ...userDatos, email });
   };
 
+  const passwordInput = (e) => {
+    const password = e.target.value;
+    setUserDatos({ ...userDatos, password });
+  };
 
-  
+  const passVal = () => {
+    setPasswordValidation(
+      userDatos.password === "" ? "La contraseña es requerida" : ""
+    );
+  };
 
   const typeInput = () => setShowPass(!showPass);
 
-  
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const email = userDatos.email;
@@ -54,7 +46,7 @@ export const Login = () => {
     const headers = { "Content-Type": "application/json" };
     const body = JSON.stringify({ email, password });
 
-    setLoading(true)
+    setLoading(true);
 
     let response = await fetch("https://reqres.in/api/login", {
       method: "POST",
@@ -62,33 +54,40 @@ export const Login = () => {
       headers,
     });
 
-    setLoading(false)
+    setLoading(false);
 
-    const data  = await response.json();
+    const data = await response.json();
 
-    const emailVal2 = () => {
-      setWrongEmail(data.error === 'user not found' ? "El usuario no existe" : ""); 
-
-    }
+  
+    const emailVal = () => {
+      if (userDatos.email === "") {
+        setEmailValidation("El email es requerido");
+      } else if (data.error === "user not found") {
+        setEmailValidation("El usuario no existe");
+      } else {
+        setEmailValidation("");
+      }
+    };
 
     emailVal();
-    emailVal2();
     passVal();
-    
 
     if (response.status !== 200) {
       console.log("Error");
     } else {
-      navigate('/table')
+      navigate("/table");
     }
   };
-
 
   return (
     <div className="container">
       <div className="content">
         <label className="title">Inicio de Sesión</label>
-        <div className={`loader ${loading === true ? 'loadervisible' : 'loaderhidden'}`} />
+        <div
+          className={`loader ${
+            loading === true ? "loadervisible" : "loaderhidden"
+          }`}
+        />
         <label>Email</label>
         <input
           placeholder="ejemplo@ejemplo.com"
@@ -97,7 +96,6 @@ export const Login = () => {
           onChange={emailInput}
         />
         <span className="spanVal"> {emailValidation} </span>
-        <span className="spanVal"> {wrongEmail} </span>
         <label>Password</label>
         <div className="pass">
           <input
@@ -112,7 +110,7 @@ export const Login = () => {
           </button>
         </div>
         <span className="spanVal"> {passwordValidation} </span>
-        <button className="btnLogin" onClick={() => fetchData() }>
+        <button className="btnLogin" onClick={() => fetchData()}>
           Iniciar Sesión
         </button>
       </div>
