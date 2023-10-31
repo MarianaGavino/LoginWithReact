@@ -66,9 +66,7 @@ export const Login = () => {
 
     val();
 
-    if (response.status !== 200) {
-      console.log("Error");
-    } else {
+    if (response.status === 200) {
       navigate("/table");
     }
   };
@@ -113,5 +111,4 @@ export const Login = () => {
   );
 };
 
-// eve.holt@reqres.in
-// cityslicka
+
